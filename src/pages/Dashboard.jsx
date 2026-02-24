@@ -34,7 +34,7 @@ const Dashboard = ({ user }) => {
             <h2 style={{ color: success, margin: 0 }}>{stats.active}</h2>
           </div>
           <div style={{ backgroundColor: card, padding: '20px', borderRadius: '10px' }}>
-            <p style={{ color: textMuted, margin: '0 0 5px 0' }}>Pending Studens</p>
+            <p style={{ color: textMuted, margin: '0 0 5px 0' }}>Average Marks</p>
             <h2 style={{ color: '#f59e0b', margin: 0 }}>{stats.avgMarks}%</h2>
           </div>
       
@@ -43,12 +43,27 @@ const Dashboard = ({ user }) => {
         {/* Recent Students */}
         <div style={{ backgroundColor: card, padding: '20px', borderRadius: '10px' }}>
           <h3 style={{ color: text, marginTop: 0, marginBottom: '15px' }}>Recent Students</h3>
-          {students.slice(0, 3).map(s => (
+          {students.slice(-3).reverse().map(s => (
             <div key={s.id} style={{
               display: 'flex',
               justifyContent: 'space-between',
               padding: '10px',
               borderBottom: `1px solid ${textMuted}`
+
+
+// {students.slice(-3).reverse().map((s) => (
+//   <div key={s.id}>
+//     <p>{s.name}</p>
+//   </div>
+// ))}
+              
+
+
+
+
+
+
+
             }}>
               <span style={{ color: text }}>{s.name}</span>
               <span style={{ color: s.status === 'Active' ? success : '#ef4444' }}>

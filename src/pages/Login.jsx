@@ -11,11 +11,17 @@ const Login = ({ setUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === 'admin@gmail.com' && password === '123456') {
-      setUser({ email: 'admin@gmail.com', name: 'Admin', role: 'admin' });
+    
+    if (email === 'admin@gmail.com' && password === '12345') {
+      const userData = { 
+        email: 'admin@test.com', 
+        name: 'Admin User', 
+        role: 'admin' 
+      };
+      setUser(userData);
       navigate('/dashboard');
-      setError('');
-    } else {
+    } 
+    else {
       setError('Email ama password Mid Ayaa khalad');
     }
   };
@@ -40,6 +46,16 @@ const Login = ({ setUser }) => {
         <h2 style={{ color: text, marginBottom: '20px', textAlign: 'center' }}>
           Student Management
         </h2>
+
+        <div style={{
+          backgroundColor: bg,
+          padding: '10px',
+          borderRadius: '5px',
+          marginBottom: '20px',
+          fontSize: '14px'
+        }}>
+          <p style={{ color: text, margin: '5px 0' }}>👤 <strong>Admin</strong>: admin@gmail.com  <strong>pass</strong>:12345</p>
+        </div>
 
         {error && (
           <div style={{

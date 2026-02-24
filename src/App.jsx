@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { StudentProvider } from './context/StudentContext';
@@ -9,12 +9,24 @@ import Students from './pages/Students';
 import NotFound from './pages/NotFound';
 
 function App() {
-  const [user, setUser] = useState(null);
+  // ✅ Kaydi USER-ka kaliya
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('user');
+    }
+  }, [user]);
 
   return (
     <BrowserRouter>
       <ThemeProvider>
-        <StudentProvider>
+        <StudentProvider> 
           <Navbar user={user} setUser={setUser} />
           <Routes>
             <Route path="/login" element={<Login setUser={setUser} />} />

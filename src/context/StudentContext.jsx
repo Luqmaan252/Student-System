@@ -5,18 +5,19 @@ const StudentContext = createContext();
 export const useStudents = () => useContext(StudentContext);
 
 export const StudentProvider = ({ children }) => {
+  // EMPTY array marka ugu horeysa
   const [students, setStudents] = useState(() => {
-    const saved = localStorage.getItem('students');
-    return saved ? JSON.parse(saved) : [
-
-    ];
+    const saved = localStorage.getItem('myStudents');
+    console.log('Loading students from storage:', saved);
+    return saved ? JSON.parse(saved) : []; 
   });
 
+  //  SAVE to localStorage every time students change
   useEffect(() => {
-    localStorage.setItem('students', JSON.stringify(students));
+    console.log('Saving students to storage:', students);
+    localStorage.setItem('myStudents', JSON.stringify(students));
   }, [students]);
 
-  // CRUD
   const addStudent = (student) => {
     const newStudent = {
       ...student,
@@ -35,8 +36,6 @@ export const StudentProvider = ({ children }) => {
     }
   };
 
-  const getStudent = (id) => students.find(s => s.id === id);
-
   const getStats = () => ({
     total: students.length,
     active: students.filter(s => s.status === 'Active').length,
@@ -49,7 +48,6 @@ export const StudentProvider = ({ children }) => {
       addStudent,
       updateStudent,
       deleteStudent,
-      getStudent,
       getStats
     }}>
       {children}

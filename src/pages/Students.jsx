@@ -172,7 +172,7 @@ const Students = () => {
                   }}
                 >
                   <option value="Active">Active</option>
-                  <option value="Warning">Pending</option>
+                  <option value="Warning">Warning</option>
                 </select>
               </div>
               <div style={{ display: 'flex', gap: '10px' }}>
@@ -211,66 +211,80 @@ const Students = () => {
         )}
 
         {/* Students Table */}
-        <div style={{ backgroundColor: card, borderRadius: '10px', overflow: 'hidden' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ backgroundColor: bg }}>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Name</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Course</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Sem</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Marks</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Attend</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Status</th>
-                <th style={{ padding: '12px', textAlign: 'left', color: text }}>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map(s => (
-                <tr key={s.id} style={{ borderTop: `1px solid ${textMuted}` }}>
-                  <td style={{ padding: '12px', color: text }}>{s.name}</td>
-                  <td style={{ padding: '12px', color: text }}>{s.course}</td>
-                  <td style={{ padding: '12px', color: text }}>{s.semester}</td>
-                  <td style={{ padding: '12px', color: text }}>{s.marks}%</td>
-                  <td style={{ padding: '12px', color: text }}>{s.attendance}%</td>
-                  <td style={{ padding: '12px', color: s.status === 'Active' ? success : danger }}>
-                    {s.status}
-                  </td>
-                  <td style={{ padding: '12px' }}>
-                    <button
-                      onClick={() => handleEdit(s)}
-                      style={{
-                        padding: '4px 8px',
-                        backgroundColor: warning,
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '3px',
-                        cursor: 'pointer',
-                        marginRight: '5px',
-                        fontSize: '12px'
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => deleteStudent(s.id)}
-                      style={{
-                        padding: '4px 8px',
-                        backgroundColor: danger,
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '3px',
-                        cursor: 'pointer',
-                        fontSize: '12px'
-                      }}
-                    >
-                      Delete
-                    </button>
-                  </td>
+        {students.length === 0 ? (
+          <div style={{
+            backgroundColor: card,
+            padding: '40px',
+            borderRadius: '10px',
+            textAlign: 'center'
+          }}>
+            <p style={{ color: textMuted, fontSize: '16px' }}>
+              👋 Wali ma aadan darin student. 
+              kuji buttonka <strong>"Add Student"</strong> si aad ugu soo darto Arday Cusub!
+            </p>
+          </div>
+        ) : (
+          <div style={{ backgroundColor: card, borderRadius: '10px', overflow: 'hidden' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ backgroundColor: bg }}>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Name</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Course</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Sem</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Marks</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Attend</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Status</th>
+                  <th style={{ padding: '12px', textAlign: 'left', color: text }}>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {students.map(s => (
+                  <tr key={s.id} style={{ borderTop: `1px solid ${textMuted}` }}>
+                    <td style={{ padding: '12px', color: text }}>{s.name}</td>
+                    <td style={{ padding: '12px', color: text }}>{s.course}</td>
+                    <td style={{ padding: '12px', color: text }}>{s.semester}</td>
+                    <td style={{ padding: '12px', color: text }}>{s.marks}%</td>
+                    <td style={{ padding: '12px', color: text }}>{s.attendance}%</td>
+                    <td style={{ padding: '12px', color: s.status === 'Active' ? success : danger }}>
+                      {s.status}
+                    </td>
+                    <td style={{ padding: '12px' }}>
+                      <button
+                        onClick={() => handleEdit(s)}
+                        style={{
+                          padding: '4px 8px',
+                          backgroundColor: warning,
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '3px',
+                          cursor: 'pointer',
+                          marginRight: '5px',
+                          fontSize: '12px'
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => deleteStudent(s.id)}
+                        style={{
+                          padding: '4px 8px',
+                          backgroundColor: danger,
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '3px',
+                          cursor: 'pointer',
+                          fontSize: '12px'
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
