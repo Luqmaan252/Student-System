@@ -11,9 +11,9 @@ const Students = () => {
   const [formData, setFormData] = useState({
     name: '',
     course: '',
-    semester: 1,
-    marks: 0,
-    attendance: 0,
+    semester: "",
+    marks: "",
+    attendance: "",
     status: 'Active'
   });
 
